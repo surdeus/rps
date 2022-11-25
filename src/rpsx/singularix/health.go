@@ -2,13 +2,19 @@ package singularix
 
 import (
 	. "github.com/surdeus/rps/src/rpsx"
+	"fmt"
 )
 
-type RightHand struct {
-	Basic
+type HumanEye struct {
+	*Basic
 }
 
-type LeftHand struct {
-	Basic
+type HumanHand struct {
+	*Basic
+}
+
+func (h *HumanHand)Max(c *Char) Float {
+	fmt.Println("in")
+	return c.Basics.Get("end") * 4
 }
 

@@ -4,14 +4,31 @@ import (
 	. "github.com/surdeus/rps/src/rpsx"
 )
 
-func NewChar() *Char {
+const (
+)
+
+func NewHumanChar() *Char {
 	c := &Char{}
-	c.Basics = Valuers {
-		"str" : Strength{NewBasic()},
+	c.Basics = &Valuers {
+		C: c,
+		VS :map[string] Valuer {
+		"str" : &Strength{NewBasic()},
+		"per" : &Perception{NewBasic()},
+		"end" : &Endurance{NewBasic()},
+		"cha" : &Charisma{NewBasic()},
+		"int" : &Intelligence{NewBasic()},
+		"agi" : &Agility{NewBasic()},
+		"lck" : &Luck{NewBasic()},
+		},
 	}
 
-	str, _ := c.Basics["str"]
-	str.Set(7)
+	c.Healths = &Valuers {
+		C: c,
+		VS : map[string] Valuer {
+		"rhand" : &HumanHand{NewBasic()},
+		"lhand" : &HumanHand{NewBasic()},
+		},
+	}
 
 	return c
 }
