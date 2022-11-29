@@ -3,16 +3,20 @@ package main
 import (
 	sinx "github.com/surdeus/rps/src/rpsx/singularix"
 	"fmt"
-	. "github.com/surdeus/rps/src/rpsx"
+	"encoding/json"
+	//"github.com/surdeus/rps/src/rpsx"
 )
 
 func main() {
-	char := sinx.NewHumanChar()
-	char.Basics.Set("str", 7)
-	char.Basics.Set("end", 5)
-	fmt.Println(char.Basics.Get("str"))
-	//fmt.Println(char.Healths.Max("rhand"))
-	char.Healths.Set("rhand", Infinity)
-	fmt.Println(char.Healths.Get("rhand"))
-	fmt.Println(char)
+	c := sinx.NewHuman()
+	c.SetBasic("str", 7)
+	c.SetBasic("end", 5)
+	fmt.Println(c.Basic("str"))
+	fmt.Println(c.MaxHealth("reye"))
+	js, err := json.Marshal(*c)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(js)
+	}
 }
