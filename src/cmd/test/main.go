@@ -1,22 +1,17 @@
 package main
 
 import (
-	sinx "github.com/surdeus/rps/src/rpsx/singularix"
+	"github.com/surdeus/rps/src/rpsx"
 	"fmt"
-	"encoding/json"
+	//"encoding/json"
 	//"github.com/surdeus/rps/src/rpsx"
 )
 
 func main() {
-	c := sinx.NewHuman()
-	c.SetBasic("str", 7)
-	c.SetBasic("end", 5)
-	fmt.Println(c.Basic("str"))
-	fmt.Println(c.MaxHealth("reye"))
-	js, err := json.Marshal(*c)
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println(js)
-	}
+	c := rpsx.NewHuman("Jay")
+	fmt.Println(c.Organ("rhand"))
+	fmt.Println(c.Organ("lleg"))
+	fmt.Println(c.Health("lleg"))
+	c.AddHealth("lleg", -10000)
+	fmt.Println(c.Health("lleg"))
 }

@@ -1,5 +1,9 @@
 package rpsx
 
+import (
+	"math"
+)
+
 type Float float64
 type CharName string
 
@@ -10,32 +14,57 @@ type SlotName string
 
 type OrganName string
 type Organs map[OrganName] *Organ
-type OrganType string
-// Every organ type must have its defined max value function.
-type OrganMap map[OrganType] func(*Char) Float
+type OrganKind string
+type OrganMap map[OrganKind] func(*Char) Float
 
 type Skill string
 
-// The main structure to store system description.
-// Organs, states, skills etc.
-type Implementation struct {
-	OrganMap OrganMap
-}
-
 type Char struct {
-	Impl *Implementation
 	Name CharName
 	Basics Basics
 	Organs Organs
 }
 
 type Organ struct {
-	Type OrganType
+	Kind OrganKind
 	Health Float
 }
+
+const (
+	Infinity Float = math.MaxFloat64
+)
 
 func (c *Char)Basic(name BasicName) Float {
 	return c.Basics[name]
 }
 
-func (c Char)Organ(name )
+func (c *Char)Organ(name OrganName) Float {
+	return MainOrganMap[c.Organs[name].Kind](c)
+}
+
+func (c *Char)Health(name OrganName) Float {
+	return c.Organs[name].Health
+}
+
+func (c *Char)SetHealth(name OrganName, h Float) {
+	c.Organs[name].Health = Clutch(
+		h,
+		-c.Organ(name),
+		c.Organ(name),
+	)
+}
+
+func (c *Char)AddHealth(name OrganName, a Float) {
+	c.SetHealth(name, c.Health(name) + a)
+}
+
+func Clutch(v, min, max Float) Float {
+	if v < min {
+		return min
+	} else if v > max {
+		return max
+	}
+
+	return v
+}
+
