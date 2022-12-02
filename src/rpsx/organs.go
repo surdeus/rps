@@ -9,7 +9,7 @@ var (
 	}
 )
 
-func NewOrgan(kind OrganKind) *Organ {
+func NO(kind OrganKind) *Organ {
 	return &Organ{kind, 0}
 }
 
@@ -24,10 +24,10 @@ func NewHuman(name CharName) *Char {
 	}
 
 	c.Organs = Organs {
-		"rhand" : NewOrgan("human-hand"),
-		"lhand" : NewOrgan("human-hand"),
-		"rleg" : NewOrgan("human-leg"),
-		"lleg" : NewOrgan("human-leg"),
+		"rhand" : NO("human-hand"),
+		"lhand" : NO("human-hand"),
+		"rleg" : NO("human-leg"),
+		"lleg" : NO("human-leg"),
 	}
 
 	for v := range c.Organs {
@@ -38,10 +38,10 @@ func NewHuman(name CharName) *Char {
 }
 
 func HumanHand(c *Char) Float {
-	return c.Basic("end") * 4
+	return c.B("end") * 4
 }
 
 func HumanLeg(c *Char) Float {
-	return c.Basic("end") * 5
+	return c.B("end") * 5
 }
 

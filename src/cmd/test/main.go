@@ -9,9 +9,9 @@ import (
 
 func main() {
 	c := rpsx.NewHuman("Jay")
-	fmt.Println(c.Organ("rhand"))
-	fmt.Println(c.Organ("lleg"))
-	fmt.Println(c.Health("lleg"))
+	fmt.Println(c.O("rhand"))
+	fmt.Println(c.O("lleg"))
+	fmt.Println(c.H("lleg"))
 	c.AddHealth("lleg", -10000)
-	fmt.Println(c.Health("lleg"))
+	fmt.Println(c.H("lleg"))
 }
